@@ -1,0 +1,59 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      tableProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+mixtureFractionDefinition "readFromTable";
+
+interpolationType       linearInterpolation;
+
+//These for 1 ATM COLD
+//operatingPressure       101325.0;
+//canteraFileName         "../FLAMELETS/FLAM_1ATM_COLD/Table";
+//#include             "../../FLAMELETS/FLAM_1ATM_COLD/chi_param.include"
+//#include             "../../FLAMELETS/FLAM_1ATM_COLD/Zeta_param.include"
+//#include             "../../FLAMELETS/FLAM_1ATM_COLD/Z_param.include"
+
+//These for 1 ATM
+operatingPressure       100615.0;
+canteraFileName         "../FLAMELETS/SF_GRI30_chi0_ext/Table";
+#include             "../../FLAMELETS/SF_GRI30_chi0_ext/chi_param.include"
+#include             "../../FLAMELETS/SF_GRI30_chi0_ext/Zeta_param.include"
+#include             "../../FLAMELETS/SF_GRI30_chi0_ext/Z_param.include"
+
+
+//These for 2 ATM
+//operatingPressure       202650.0;
+//canteraFileName         "../FLAMELETS/FLAM_2ATM/Table";
+//#include             "../../FLAMELETS/FLAM_2ATM/chi_param.include"
+//#include             "../../FLAMELETS/FLAM_2ATM/Zeta_param.include"
+//#include             "../../FLAMELETS/FLAM_2ATM/Z_param.include"
+
+//These for 5 ATM
+//operatingPressure      506625.0; 
+//canteraFileName         "../FLAMELETS/FLAM_5ATM/Table";
+//#include             "../../FLAMELETS/FLAM_5ATM/chi_param.include"
+//#include             "../../FLAMELETS/FLAM_5ATM/Zeta_param.include"
+//#include             "../../FLAMELETS/FLAM_5ATM/Z_param.include"
+
+//These for 10 ATM
+//operatingPressure     1013250.0; 
+//canteraFileName         "../FLAMELETS/FLAM_10ATM/Table";
+//#include             "../../FLAMELETS/FLAM_10ATM/chi_param.include"
+//#include             "../../FLAMELETS/FLAM_10ATM/Zeta_param.include"
+//#include             "../../FLAMELETS/FLAM_10ATM/Z_param.include"
+
+
+// ************************************************************************* //
