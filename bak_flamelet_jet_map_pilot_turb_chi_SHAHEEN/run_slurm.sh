@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --accout=k1242
+#SBATCH --account=k1242
 #SBATCH --partition=workq
 #SBATCH --job-name=fltD_chi
 #SBATCH --nodes=4
