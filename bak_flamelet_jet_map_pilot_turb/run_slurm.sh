@@ -1,10 +1,11 @@
 #!/bin/bash -l
 #SBATCH --ntasks-per-node=20
-#SBATCH -N 5
+#SBATCH -N 10
 #SBATCH -t 5-00:00:00
 #SBATCH -J fltD_Sc
 #SBATCH -e job%J.err
 #SBATCH -o job%J.out
+#SBATCH --constraint=intel
 
 sed -e "s/@STARTTIME@/startTime/g" -e "s/@ENDTIME@/0.001/g" \
     -e "s/@DELTAT@/1e-7/g" -e  "s/@WRITEINTERVAL@/0.001/g" \
@@ -13,20 +14,20 @@ sed -e "s/@STARTTIME@/startTime/g" -e "s/@ENDTIME@/0.001/g" \
     -e "s/@RESTART@/true/g" -e "s/@RESTARTOUT@/true/g" \
     system/controlDict_template > system/controlDict
 
-blockMesh
-extrudeMesh
-stitchMesh front back -perfect
-cp 1e-07/* 0
-cp 1e-07/polyMesh/* constant/polyMesh
-rm -r 1e-07
-cp 0.bak/* 0
-canteraToFoam
-setFields
+#blockMesh
+#extrudeMesh
+#stitchMesh front back -perfect
+#cp 1e-07/* 0
+#cp 1e-07/polyMesh/* constant/polyMesh
+#rm -r 1e-07
+#cp 0.bak/* 0
+#canteraToFoam
+#setFields
 decomposePar
 
 sed -e "s/@DIVPHIU@/Gauss vanLeer/g" \
     system/fvSchemes_template > system/fvSchemes
-mpirun -n 100 flameletFoam -parallel
+srun flameletFoam -parallel
 
 cp system/controlDict system/log1_controlDict
 sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.01/g" \
@@ -37,7 +38,7 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.01/g" \
     system/controlDict_template > system/controlDict
 sed -e "s/@DIVPHIU@/Gauss vanLeer/g" \
     system/fvSchemes_template > system/fvSchemes
-mpirun -n 100 flameletFoam -parallel
+srun flameletFoam -parallel
 
 cp system/controlDict system/log2_controlDict
 sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.10/g" \
@@ -48,7 +49,7 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.10/g" \
     system/controlDict_template > system/controlDict
 sed -e "s/@DIVPHIU@/Gauss vanLeer/g" \
     system/fvSchemes_template > system/fvSchemes
-mpirun -n 100 flameletFoam -parallel
+srun flameletFoam -parallel
 
 cp system/controlDict system/log3_controlDict
 sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.15/g" \
@@ -59,7 +60,7 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.15/g" \
     system/controlDict_template > system/controlDict
 sed -e "s/@DIVPHIU@/Gauss linear/g" \
     system/fvSchemes_template > system/fvSchemes
-mpirun -n 100 flameletFoam -parallel
+srun flameletFoam -parallel
 
 # START TAKING AVERAGES
 
@@ -72,7 +73,7 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.20/g" \
     system/controlDict_template > system/controlDict
 sed -e "s/@DIVPHIU@/Gauss linear/g" \
     system/fvSchemes_template > system/fvSchemes
-mpirun -n 100 flameletFoam -parallel
+srun flameletFoam -parallel
 
 
 # CONTINUE AVERAGING
@@ -85,4 +86,4 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.25/g" \
     system/controlDict_template > system/controlDict
 sed -e "s/@DIVPHIU@/Gauss linear/g" \
     system/fvSchemes_template > system/fvSchemes
-mpirun -n 100 flameletFoam -parallel
+srun flameletFoam -parallel

@@ -28,10 +28,10 @@ interpolationType       linearInterpolation;
 
 //These for 1 ATM
 operatingPressure       100615.0;
-canteraFileName         "../FLAMELETS/SF_GRI30_chi0_ext/Table";
-#include             "../../FLAMELETS/SF_GRI30_chi0_ext/chi_param.include"
-#include             "../../FLAMELETS/SF_GRI30_chi0_ext/Zeta_param.include"
-#include             "../../FLAMELETS/SF_GRI30_chi0_ext/Z_param.include"
+canteraFileName         "../../FLAMELETS/SF_GRI30_chi0_ext/Table";
+#include             "../../../FLAMELETS/SF_GRI30_chi0_ext/chi_param.include"
+#include             "../../../FLAMELETS/SF_GRI30_chi0_ext/Zeta_param.include"
+#include             "../../../FLAMELETS/SF_GRI30_chi0_ext/Z_param.include"
 
 
 //These for 2 ATM
