@@ -10,15 +10,23 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    location    "constant";
-    object      transportProperties;
+    location    "system";
+    object      fvOptions;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-transportModel  Newtonian;
-
-nu              nu [ 0 2 -1 0 0 0 0 ] 1.58e-05;
-
-Ubar            Ubar [ 0 1 -1 0 0 0 0 ] (37.9 0.0 0.0);
-
+momentumSource
+{
+    type            pressureGradientExplicitSource;
+    active          on;
+    selectionMode   all;
+    pressureGradientExplicitSourceCoeffs
+    {
+        fieldNames  (U);
+        Ubar        (8.76 0 0);
+        gradPini    gradPini [0 2 -2 0 0] 0;
+        flowDir     (1 0 0);
+    }
+}
 // ************************************************************************* //
+
