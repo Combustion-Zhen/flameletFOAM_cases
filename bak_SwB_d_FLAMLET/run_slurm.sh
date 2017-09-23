@@ -7,6 +7,7 @@
 #SBATCH -o job%J.out
 #SBATCH --constraint=intel
 
+canteraToFoam
 sed "s/@NUMSUBDOM@/200/g" \
     system/decomposeParDict_template > system/decomposeParDict
 decomposePar
