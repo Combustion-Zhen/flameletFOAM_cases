@@ -1,26 +1,32 @@
-#!/bin/bash -l
-#SBATCH --ntasks-per-node=20
-#SBATCH -N 10
-#SBATCH -t 5-00:00:00
-#SBATCH -J SwB_NR
+#!/bin/bash
+#SBATCH --account=k1242
+#SBATCH --job-name=SwBdFLT
+#SBATCH --nodes=8
+#SBATCH --ntasks-per-node=32
+#SBATCH --ntasks=256
+#SBATCH --ntasks-per-socket=16
+#SBATCH --time=3-00:00:00
 #SBATCH -e job%J.err
 #SBATCH -o job%J.out
-#SBATCH --constraint=intel
+#SBATCH --partition=72hours
+#SBATCH --qos=72hours
+
+OMP_NUM_THREADS=1
 
 canteraToFoam
-sed "s/@NUMSUBDOM@/200/g" \
+sed "s/@NUMSUBDOM@/256/g" \
     system/decomposeParDict_template > system/decomposeParDict
 decomposePar
 
 sed -e "s/@STARTTIME@/startTime/g" -e "s/@ENDTIME@/0.001/g" \
-    -e "s/@DELTAT@/1e-6/g" -e  "s/@WRITEINTERVAL@/0.001/g" \
+    -e "s/@DELTAT@/1e-7/g" -e  "s/@WRITEINTERVAL@/0.001/g" \
     -e "s/@WRITEFORMAT@/binary/g" \
     -e "s/@ENABLED@/false/g"  \
     -e "s/@RESTART@/true/g" -e "s/@RESTARTOUT@/true/g" \
     system/controlDict_template > system/controlDict
 sed -e "s/@DIVPHIU@/Gauss vanLeer/g" \
     system/fvSchemes_template > system/fvSchemes
-srun flameletFoam -parallel
+srun --hint=nomultithread flameletFoam -parallel
 
 cp system/controlDict system/log1_controlDict
 sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.01/g" \
@@ -31,7 +37,7 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.01/g" \
     system/controlDict_template > system/controlDict
 sed -e "s/@DIVPHIU@/Gauss vanLeer/g" \
     system/fvSchemes_template > system/fvSchemes
-srun flameletFoam -parallel
+srun --hint=nomultithread flameletFoam -parallel
 
 cp system/controlDict system/log2_controlDict
 sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.10/g" \
@@ -42,7 +48,7 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.10/g" \
     system/controlDict_template > system/controlDict
 sed -e "s/@DIVPHIU@/Gauss vanLeer/g" \
     system/fvSchemes_template > system/fvSchemes
-srun flameletFoam -parallel
+srun --hint=nomultithread flameletFoam -parallel
 
 #cp system/controlDict system/log3_controlDict
 #sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.15/g" \
@@ -53,7 +59,7 @@ srun flameletFoam -parallel
 #    system/controlDict_template > system/controlDict
 #sed -e "s/@DIVPHIU@/Gauss linear/g" \
 #    system/fvSchemes_template > system/fvSchemes
-#srun flameletFoam -parallel
+#srun --hint=nomultithread flameletFoam -parallel
 #
 ## START TAKING AVERAGES
 #
@@ -66,7 +72,7 @@ srun flameletFoam -parallel
 #    system/controlDict_template > system/controlDict
 #sed -e "s/@DIVPHIU@/Gauss linear/g" \
 #    system/fvSchemes_template > system/fvSchemes
-#srun flameletFoam -parallel
+#srun --hint=nomultithread flameletFoam -parallel
 #
 #
 ## CONTINUE AVERAGING
@@ -79,4 +85,4 @@ srun flameletFoam -parallel
 #    system/controlDict_template > system/controlDict
 #sed -e "s/@DIVPHIU@/Gauss linear/g" \
 #    system/fvSchemes_template > system/fvSchemes
-#srun flameletFoam -parallel
+#srun --hint=nomultithread flameletFoam -parallel

@@ -17,9 +17,9 @@ FoamFile
 
 application     pimpleFoam;
 
-startFrom       @STARTFROM@;
+startFrom       @STARTTIME@;
 
-startTime       @STARTTIME@;
+startTime       0.0;
 
 stopAt          endTime;
 
