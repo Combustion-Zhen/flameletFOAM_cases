@@ -1,0 +1,8 @@
+file/read-case SwBs_L-300_WALE.cas
+file/read-data SwBs_L-300_WALE.dat
+solve/set/time-step 5e-6
+file/auto-save/data-frequency 2000
+file/auto-save/append-file-name-with flow-time 2
+solve/dual-time-iterate 20000 3
+file/write-case-data SwBs_L-300_WALE_t0.1
+exit
