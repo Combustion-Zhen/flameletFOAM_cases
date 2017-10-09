@@ -41,7 +41,7 @@ writeCompression off;
 
 timeFormat      general;
 
-timePrecision   6;
+timePrecision   8;
 
 runTimeModifiable true;
 
