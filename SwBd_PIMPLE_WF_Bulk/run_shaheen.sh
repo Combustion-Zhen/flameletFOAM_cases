@@ -4,10 +4,10 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=32
 #SBATCH --ntasks-per-socket=16
-#SBATCH --time=1-00:00:00
 #SBATCH -e job%J.err
 #SBATCH -o job%J.out
 #SBATCH --partition=workq
+#SBATCH --time=1-00:00:00
 ##SBATCH --partition=72hours
 ##SBATCH --qos=72hours
 
@@ -61,7 +61,6 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.3/g" \
     system/controlDict_template > system/controlDict
 srun --hint=nomultithread pimpleFoam -parallel
 
-# CONTINUE AVERAGING
 cp system/controlDict system/log5_controlDict
 sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.4/g" \
     -e "s/@DELTAT@/5e-6/g" -e  "s/@WRITEINTERVAL@/0.05/g" \
