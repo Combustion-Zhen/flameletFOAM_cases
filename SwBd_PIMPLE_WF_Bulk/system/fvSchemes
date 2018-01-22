@@ -22,23 +22,23 @@ ddtSchemes
 
 gradSchemes
 {
-    default         Gauss linear;
+    default         none;
+    grad(p)         Gauss linear;
+    grad(U)         Gauss linear;
 }
 
 divSchemes
 {
     default         none;
     div(phi,U)      Gauss linear;
-    div(phi,k)      Gauss limitedLinear 1;
-    div(phi,B)      Gauss limitedLinear 1;
-    div(phi,nuTilda) Gauss limitedLinear 1;
-    div(B)          Gauss linear;
     div((nuEff*dev(T(grad(U))))) Gauss linear;
 }
 
 laplacianSchemes
 {
-    default         Gauss linear corrected;
+    default         none;
+    laplacian(nuEff,U)      Gauss linear corrected;
+    laplacian(rAUf,p)       Gauss linear corrected;
 }
 
 interpolationSchemes
