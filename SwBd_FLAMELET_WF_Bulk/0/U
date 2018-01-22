@@ -23,35 +23,23 @@ boundaryField
 {
     AIR1
     {
-        type            timeVaryingMappedFixedValue;
-        setAverage      false;
-        offset          (0 0 0);
-        mapMethod       nearest;
-        perturb         0;
+        type            fixedValue;
+        value           uniform (-37.9 0 0);
     }
     AIR2
     {
-        type            timeVaryingMappedFixedValue;
-        setAverage      false;
-        offset          (0 0 0);
-        mapMethod       nearest;
-        perturb         0;
+        type            fixedValue;
+        value           uniform (0 -37.9 0);
     }
     AIR3
     {
-        type            timeVaryingMappedFixedValue;
-        setAverage      false;
-        offset          (0 0 0);
-        mapMethod       nearest;
-        perturb         0;
+        type            fixedValue;
+        value           uniform (37.9 0 0);
     }
     AIR4
     {
-        type            timeVaryingMappedFixedValue;
-        setAverage      false;
-        offset          (0 0 0);
-        mapMethod       nearest;
-        perturb         0;
+        type            fixedValue;
+        value           uniform (0 37.9 0);
     }
     AIR
     {
