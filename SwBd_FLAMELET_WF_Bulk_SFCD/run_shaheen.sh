@@ -1,24 +1,29 @@
 #!/bin/bash
 #SBATCH --account=k1164
-#SBATCH --job-name=SwBdFLT
+#SBATCH --job-name=SwBdFLTSFCD
 #SBATCH --nodes=3
 #SBATCH --ntasks-per-node=32
 #SBATCH --ntasks-per-socket=16
-#SBATCH --time=1-00:00:00
 #SBATCH -e job%J.err
 #SBATCH -o job%J.out
-#SBATCH --partition=workq
-##SBATCH --partition=72hours
-##SBATCH --qos=72hours
+##SBATCH --partition=workq
+##SBATCH --time=1-00:00:00
+#SBATCH --partition=72hours
+#SBATCH --qos=72hours
+#SBATCH --time=1-00:00:00
 
 OMP_NUM_THREADS=1
 
 canteraToFoam
+
 sed "s/@NUMSUBDOM@/96/g" \
     system/decomposeParDict_template > system/decomposeParDict
 decomposePar -latestTime
 
 #####################################################################
+
+sed -e "s/@DIVPHIU@/vanLeerV/g" \
+    system/fvSchemes_template > system/fvSchemes
 
 sed -e "s/@STARTTIME@/startTime/g" -e "s/@ENDTIME@/0.001/g" \
     -e "s/@DELTAT@/1e-7/g" -e  "s/@WRITEINTERVAL@/0.001/g" \
@@ -38,7 +43,7 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.01/g" \
 srun --hint=nomultithread flameletFoam -parallel
 
 cp system/controlDict system/log2_controlDict
-sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.1/g" \
+sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.2/g" \
     -e "s/@DELTAT@/5e-6/g" -e "s/@WRITEINTERVAL@/0.01/g" \
     -e "s/@WRITEFORMAT@/binary/g" \
     -e "s/@ENABLED@/false/g" \
@@ -46,9 +51,14 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.1/g" \
     system/controlDict_template > system/controlDict
 srun --hint=nomultithread flameletFoam -parallel
 
+#####################################################################
+
+sed -e "s/@DIVPHIU@/SFCDV/g" \
+    system/fvSchemes_template > system/fvSchemes
+
 cp system/controlDict system/log3_controlDict
-sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.5/g" \
-    -e "s/@DELTAT@/5e-6/g" -e  "s/@WRITEINTERVAL@/0.01/g" \
+sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.6/g" \
+    -e "s/@DELTAT@/5e-6/g" -e  "s/@WRITEINTERVAL@/0.02/g" \
     -e "s/@WRITEFORMAT@/binary/g" \
     -e "s/@ENABLED@/false/g" \
     -e "s/@RESTART@/false/g" -e "s/@RESTARTOUT@/false/g" \
