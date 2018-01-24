@@ -26,13 +26,12 @@ gradSchemes
     grad(U)         leastSquares;
     grad(p)         leastSquares;
     grad(Z)         leastSquares;
-    grad(magSqr(U)) leastSquares; // TVD scheme
 }
 
 divSchemes
 {
     default         none;
-    div(phi,U)      Gauss SFCD;
+    div(phi,U)      Gauss SFCDV;
     div(phi,Z)      Gauss SFCD;
     div((muEff*dev2(T(grad(U))))) Gauss linear;
 }
