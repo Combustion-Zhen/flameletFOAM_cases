@@ -22,17 +22,18 @@ ddtSchemes
 
 gradSchemes
 {
-    default         none;
-    grad(U)         Gauss linear;
-    grad(p)         Gauss linear;
-    grad(Z)         Gauss linear;
+    default         @GRAD@;
+//    default         none;
+//    grad(U)         Gauss linear;
+//    grad(p)         Gauss linear;
+//    grad(Z)         Gauss linear;
 }
 
 divSchemes
 {
     default         none;
     div(phi,U)      Gauss @DIVPHIU@;
-    div(phi,Z)      Gauss linear;
+    div(phi,Z)      Gauss @DIVPHIZ@;
     div((muEff*dev2(T(grad(U))))) Gauss linear;
 }
 
