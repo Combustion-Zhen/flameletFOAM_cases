@@ -1,16 +1,16 @@
 #!/bin/bash
 #SBATCH --account=k1242
-#SBATCH --job-name=SwBdFLTSFCD
+#SBATCH --job-name=SwBdFLTTIME
 #SBATCH --nodes=3
 #SBATCH --ntasks-per-node=32
 #SBATCH --ntasks-per-socket=16
 #SBATCH -e job%J.err
 #SBATCH -o job%J.out
-##SBATCH --partition=workq
-##SBATCH --time=1-00:00:00
-#SBATCH --partition=72hours
-#SBATCH --qos=72hours
-#SBATCH --time=3-00:00:00
+#SBATCH --partition=workq
+#SBATCH --time=1-00:00:00
+##SBATCH --partition=72hours
+##SBATCH --qos=72hours
+##SBATCH --time=3-00:00:00
 
 OMP_NUM_THREADS=1
 
@@ -22,8 +22,8 @@ decomposePar -latestTime
 
 #####################################################################
 
-sed -e "s/@GRAD@/cellLimited Gauss linear 1/g" \
-    -e "s/@DIVPHIU@/vanLeerV/g" -e "s/@DIVPHIZ@/vanLeer/g" \
+sed -e "s/@TIMESCHEME@/backward/g" \
+    -e "s/@GRAD@/leastSquares/g" -e "s/@DIVPHIU@/vanLeerV/g" \
     system/fvSchemes_template > system/fvSchemes
 
 sed -e "s/@STARTTIME@/startTime/g" -e "s/@ENDTIME@/0.001/g" \
@@ -52,10 +52,6 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.1/g" \
     system/controlDict_template > system/controlDict
 srun --hint=nomultithread flameletFoam -parallel
 
-sed -e "s/@GRAD@/Gauss linear/g" \
-    -e "s/@DIVPHIU@/vanLeerV/g" -e "s/@DIVPHIZ@/vanLeer/g" \
-    system/fvSchemes_template > system/fvSchemes
-
 cp system/controlDict system/log3_controlDict
 sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.3/g" \
     -e "s/@DELTAT@/5e-6/g" -e "s/@WRITEINTERVAL@/0.1/g" \
@@ -65,14 +61,14 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.3/g" \
     system/controlDict_template > system/controlDict
 srun --hint=nomultithread flameletFoam -parallel
 
-#####################################################################
+####################################################################
 
-sed -e "s/@GRAD@/Gauss linear/g" \
-    -e "s/@DIVPHIU@/SFCDV/g" -e "s/@DIVPHIZ@/linear/g" \
+sed -e "s/@TIMESCHEME@/backward/g" \
+    -e "s/@GRAD@/leastSquares/g" -e "s/@DIVPHIU@/LUST grad(U)/g" \
     system/fvSchemes_template > system/fvSchemes
 
 cp system/controlDict system/log4_controlDict
-sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/1.0/g" \
+sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.8/g" \
     -e "s/@DELTAT@/5e-6/g" -e  "s/@WRITEINTERVAL@/0.1/g" \
     -e "s/@WRITEFORMAT@/binary/g" \
     -e "s/@ENABLED@/false/g" \
