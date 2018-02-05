@@ -22,7 +22,7 @@ decomposePar -latestTime
 
 #####################################################################
 
-sed -e "s/@TIMESCHEME@/backward/g" \
+sed -e "s/@TIMESCHEME@/Euler/g" \
     -e "s/@GRAD@/leastSquares/g" -e "s/@DIVPHIU@/vanLeerV/g" \
     system/fvSchemes_template > system/fvSchemes
 
@@ -63,8 +63,8 @@ srun --hint=nomultithread flameletFoam -parallel
 
 ####################################################################
 
-sed -e "s/@TIMESCHEME@/backward/g" \
-    -e "s/@GRAD@/leastSquares/g" -e "s/@DIVPHIU@/LUST grad(U)/g" \
+sed -e "s/@TIMESCHEME@/Euler/g" \
+    -e "s/@GRAD@/Gauss linear/g" -e "s/@DIVPHIU@/LUST grad(U)/g" \
     system/fvSchemes_template > system/fvSchemes
 
 cp system/controlDict system/log4_controlDict
