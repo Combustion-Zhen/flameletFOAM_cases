@@ -1,0 +1,36 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      tableProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+mixtureFractionDefinition "readFromTable";
+
+interpolationType       linearInterpolation;
+
+//These for 1 ATM COLD
+//operatingPressure       101325.0;
+//canteraFileName         "../FLAMELETS/FLAM_1ATM_COLD/Table";
+//#include             "../../FLAMELETS/FLAM_1ATM_COLD/chi_param.include"
+//#include             "../../FLAMELETS/FLAM_1ATM_COLD/Zeta_param.include"
+//#include             "../../FLAMELETS/FLAM_1ATM_COLD/Z_param.include"
+
+//These for 1 ATM
+operatingPressure       101325.0;
+canteraFileName         "../FLAMELETS/SwB_GRI30/Table";
+#include             "../../FLAMELETS/SwB_GRI30/chi_param.include"
+#include             "../../FLAMELETS/SwB_GRI30/Zeta_param.include"
+#include             "../../FLAMELETS/SwB_GRI30/Z_param.include"
+
+// ************************************************************************* //
