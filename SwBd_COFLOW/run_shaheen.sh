@@ -35,7 +35,10 @@ decomposePar -latestTime
 #####################################################################
 
 sed -e "s/@TIMESCHEME@/Euler/g" \
-    -e "s/@GRAD@/leastSquares/g" -e "s/@DIVPHIU@/vanLeerV/g" \
+    -e "s/@GRAD@/cellLimited Gauss linear 1/g" \
+    -e "s/@DIVPHIU@/vanLeerV/g" \
+    -e "s/@DIVPHIZ@/vanLeer/g" \
+    -e "s/@LAPS@/vanLeer phi/g" \
     system/fvSchemes_template > system/fvSchemes
 
 sed -e "s/@STARTTIME@/startTime/g" -e "s/@ENDTIME@/0.005/g" \
@@ -103,7 +106,10 @@ srun --hint=nomultithread flameletFoam -parallel
 ####################################################################
 
 sed -e "s/@TIMESCHEME@/Euler/g" \
-    -e "s/@GRAD@/Gauss linear/g" -e "s/@DIVPHIU@/LUST grad(U)/g" \
+    -e "s/@GRAD@/Gauss linear/g" \
+    -e "s/@DIVPHIU@/LUST grad(U)/g" \
+    -e "s/@DIVPHIZ@/SFCD/g" \
+    -e "s/@LAPS@/linear/g" \
     system/fvSchemes_template > system/fvSchemes
 
 cd constant/boundaryData
