@@ -14,7 +14,7 @@
 
 OMP_NUM_THREADS=1
 
-module load python/3.6.2
+module load python/3.6.4
 AIRINLET="AIR1 AIR2 AIR3 AIR4"
 
 cd constant/boundaryData
@@ -41,7 +41,7 @@ sed -e "s/@TIMESCHEME@/Euler/g" \
     -e "s/@LAPS@/vanLeer phi/g" \
     system/fvSchemes_template > system/fvSchemes
 
-sed -e "s/@STARTTIME@/startTime/g" -e "s/@ENDTIME@/0.005/g" \
+sed -e "s/@STARTTIME@/startTime/g" -e "s/@ENDTIME@/0.002/g" \
     -e "s/@DELTAT@/1e-7/g" -e  "s/@WRITEINTERVAL@/0.001/g" \
     -e "s/@WRITEFORMAT@/binary/g" \
     -e "s/@ENABLED@/false/g"  \
@@ -51,7 +51,7 @@ srun --hint=nomultithread flameletFoam -parallel
 
 cp system/controlDict system/log1_controlDict
 sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.01/g" \
-    -e "s/@DELTAT@/1e-6/g" -e "s/@WRITEINTERVAL@/0.005/g" \
+    -e "s/@DELTAT@/1e-6/g" -e "s/@WRITEINTERVAL@/0.002/g" \
     -e "s/@WRITEFORMAT@/binary/g" \
     -e "s/@ENABLED@/false/g" \
     -e "s/@RESTART@/true/g" -e "s/@RESTARTOUT@/true/g" \
@@ -60,7 +60,7 @@ srun --hint=nomultithread flameletFoam -parallel
 
 cp system/controlDict system/log2_controlDict
 sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.1/g" \
-    -e "s/@DELTAT@/1e-6/g" -e "s/@WRITEINTERVAL@/0.09/g" \
+    -e "s/@DELTAT@/1e-6/g" -e "s/@WRITEINTERVAL@/0.01/g" \
     -e "s/@WRITEFORMAT@/binary/g" \
     -e "s/@ENABLED@/false/g" \
     -e "s/@RESTART@/true/g" -e "s/@RESTARTOUT@/true/g" \

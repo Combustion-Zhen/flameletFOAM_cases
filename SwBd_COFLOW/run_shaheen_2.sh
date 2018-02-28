@@ -14,7 +14,7 @@
 
 OMP_NUM_THREADS=1
 
-module load python/3.6.2
+module load python/3.6.4
 AIRINLET="AIR1 AIR2 AIR3 AIR4"
 
 #cd constant/boundaryData
