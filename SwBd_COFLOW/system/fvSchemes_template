@@ -22,26 +22,26 @@ ddtSchemes
 
 gradSchemes
 {
-    default         @GRAD@;
-//    grad(U)         @GRAD@;
-//    grad(p)         @GRAD@;
-//    grad(Z)         @GRAD@;
+    default         none;
+    grad(U)         @GRAD@;
+    grad(p)         @GRAD@;
+    grad(Z)         @GRAD@;
 }
 
 divSchemes
 {
     default         none;
     div(phi,U)      Gauss @DIVPHIU@;
-    div(phi,Z)      Gauss @DIVPHIZ@;
+    div(phi,Z)      Gauss SFCD;
     div((muEff*dev2(T(grad(U))))) Gauss linear;
 }
 
 laplacianSchemes
 {
-    default         Gauss @LAPS@ corrected;
-//    laplacian(muEff,U)         Gauss @LAPS@ corrected;
-//    laplacian(rhorAUf,p)       Gauss @LAPS@ corrected;
-//    laplacian(DZEff,Z)         Gauss @LAPS@ corrected;
+    default         none;
+    laplacian(muEff,U)         Gauss linear corrected;
+    laplacian(rhorAUf,p)       Gauss linear corrected;
+    laplacian(DZEff,Z)         Gauss linear corrected;
 }
 
 interpolationSchemes
