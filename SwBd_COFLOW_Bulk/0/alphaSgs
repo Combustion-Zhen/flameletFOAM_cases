@@ -41,13 +41,53 @@ boundaryField
     {
         type            calculated;
     }
-    WALL
+    WALL_SWIRL_IN
     {
         type            calculated;
     }
-    BOTTOM
+    WALL_SWIRL_OUT
     {
-        type            zeroGradient;
+        type            calculated;
+    }
+    WALL_TANGENTIAL
+    {
+        type            calculated;
+    }
+    WALL_AIR_IN
+    {
+        type            calculated;
+    }
+    WALL_AIR_OUT
+    {
+        type            calculated;
+    }
+    WALL_TUBE_LOW_IN
+    {
+        type            calculated;
+    }
+    WALL_TUBE_LOW_OUT
+    {
+        type            calculated;
+    }
+    WALL_TUBE_UP_IN
+    {
+        type            calculated;
+    }
+    WALL_TUBE_UP
+    {
+        type            calculated;
+    }
+    WALL_TUBE_EDGE
+    {
+        type            calculated;
+    }
+    WALL_QUARL_IN
+    {
+        type            calculated;
+    }
+    WALL_QUARL_OUT
+    {
+        type            calculated;
     }
     OUT
     {

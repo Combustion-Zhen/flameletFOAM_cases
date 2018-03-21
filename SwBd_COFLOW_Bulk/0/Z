@@ -46,15 +46,53 @@ boundaryField
         type            fixedValue;
         value           uniform 0;
     }
-    WALL
+    WALL_SWIRL_IN
     {
         type            zeroGradient;
     }
-    BOTTOM
+    WALL_SWIRL_OUT
     {
-        type            inletOutlet;
-        inletValue      uniform 0;
-        value           uniform 0;
+        type            zeroGradient;
+    }
+    WALL_TANGENTIAL
+    {
+        type            zeroGradient;
+    }
+    WALL_AIR_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_AIR_OUT
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_LOW_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_LOW_OUT
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_UP_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_UP
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_EDGE
+    {
+        type            zeroGradient;
+    }
+    WALL_QUARL_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_QUARL_OUT
+    {
+        type            zeroGradient;
     }
     OUT
     {

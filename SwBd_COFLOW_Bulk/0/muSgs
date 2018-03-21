@@ -41,16 +41,53 @@ boundaryField
     {
         type            calculated;
     }
-    WALL
+    WALL_SWIRL_IN
     {
         type            mutUSpaldingWallFunction;
-        value           uniform 0;
     }
-    BOTTOM
+    WALL_SWIRL_OUT
     {
-        type            inletOutlet;
-        inletValue      uniform 0;
-        value           uniform 0;
+        type            mutUSpaldingWallFunction;
+    }
+    WALL_TANGENTIAL
+    {
+        type            mutUSpaldingWallFunction;
+    }
+    WALL_AIR_IN
+    {
+        type            mutUSpaldingWallFunction;
+    }
+    WALL_AIR_OUT
+    {
+        type            mutUSpaldingWallFunction;
+    }
+    WALL_TUBE_LOW_IN
+    {
+        type            mutUSpaldingWallFunction;
+    }
+    WALL_TUBE_LOW_OUT
+    {
+        type            mutUSpaldingWallFunction;
+    }
+    WALL_TUBE_UP_IN
+    {
+        type            mutUSpaldingWallFunction;
+    }
+    WALL_TUBE_UP
+    {
+        type            mutUSpaldingWallFunction;
+    }
+    WALL_TUBE_EDGE
+    {
+        type            mutUSpaldingWallFunction;
+    }
+    WALL_QUARL_IN
+    {
+        type            mutUSpaldingWallFunction;
+    }
+    WALL_QUARL_OUT
+    {
+        type            mutUSpaldingWallFunction;
     }
     OUT
     {
