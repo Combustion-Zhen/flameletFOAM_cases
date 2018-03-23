@@ -1,0 +1,116 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      Z;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    AIR1
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+    AIR2
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+    AIR3
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+    AIR4
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+    AIR
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+    WALL_SWIRL_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_SWIRL_OUT
+    {
+        type            zeroGradient;
+    }
+    WALL_TANGENTIAL
+    {
+        type            zeroGradient;
+    }
+    WALL_AIR_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_AIR_OUT
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_LOW_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_LOW_OUT
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_UP_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_UP
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_EDGE
+    {
+        type            zeroGradient;
+    }
+    WALL_QUARL_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_QUARL_OUT
+    {
+        type            zeroGradient;
+    }
+    OUT
+    {
+        type            inletOutlet;
+        inletValue      uniform 0;
+        value           uniform 0;
+    }
+    ATOM
+    {
+        type            inletOutlet;
+        inletValue      uniform 0;
+        value           uniform 0;
+    }
+    FUEL
+    {
+        type            fixedValue;
+        value           uniform 1.0;
+    }
+}
+
+// ************************************************************************* //

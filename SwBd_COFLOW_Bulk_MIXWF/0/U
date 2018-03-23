@@ -1,0 +1,161 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    location    "0";
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (0 0 4.8);
+
+boundaryField
+{
+//    AIR1
+//    {
+//        type            timeVaryingMappedFixedValue;
+//        setAverage      false;
+//        offset          (0 0 0);
+//        mapMethod       nearest;
+//        perturb         0;
+//    }
+//    AIR2
+//    {
+//        type            timeVaryingMappedFixedValue;
+//        setAverage      false;
+//        offset          (0 0 0);
+//        mapMethod       nearest;
+//        perturb         0;
+//    }
+//    AIR3
+//    {
+//        type            timeVaryingMappedFixedValue;
+//        setAverage      false;
+//        offset          (0 0 0);
+//        mapMethod       nearest;
+//        perturb         0;
+//    }
+//    AIR4
+//    {
+//        type            timeVaryingMappedFixedValue;
+//        setAverage      false;
+//        offset          (0 0 0);
+//        mapMethod       nearest;
+//        perturb         0;
+//    }
+    AIR1
+    {
+        type            fixedValue;
+        value           uniform (-37.9 0 0);
+    }
+    AIR2
+    {
+        type            fixedValue;
+        value           uniform (0 -37.9 0);
+    }
+    AIR3
+    {
+        type            fixedValue;
+        value           uniform (37.9 0 0);
+    }
+    AIR4
+    {
+        type            fixedValue;
+        value           uniform (0 37.9 0);
+    }
+    AIR
+    {
+        type            fixedValue;
+        value           uniform (0 0 0.65);
+    }
+    WALL_SWIRL_IN
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    WALL_SWIRL_OUT
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    WALL_TANGENTIAL
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    WALL_AIR_IN
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    WALL_AIR_OUT
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    WALL_TUBE_LOW_IN
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    WALL_TUBE_LOW_OUT
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    WALL_TUBE_UP_IN
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    WALL_TUBE_UP
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    WALL_TUBE_EDGE
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    WALL_QUARL_IN
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    WALL_QUARL_OUT
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    OUT
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0);
+    }
+    ATOM
+    {
+        type            pressureInletOutletVelocity;
+        value           uniform (0 0 0);
+    }
+    FUEL
+    {
+        type            timeVaryingMappedFixedValue;
+        setAverage      false;
+        offset          (0 0 0);
+        mapMethod       nearest;
+        perturb         0;
+    }
+}
+
+// ************************************************************************* //

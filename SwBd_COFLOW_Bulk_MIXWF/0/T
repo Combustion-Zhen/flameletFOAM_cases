@@ -1,0 +1,115 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.5.x                                 |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      T;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 1 0 0 0];
+
+internalField   uniform 298;
+
+boundaryField
+{
+    AIR1
+    {
+        type            calculated;
+        value           uniform 298;
+    }
+    AIR2
+    {
+        type            calculated;
+        value           uniform 298;
+    }
+    AIR3
+    {
+        type            calculated;
+        value           uniform 298;
+    }
+    AIR4
+    {
+        type            calculated;
+        value           uniform 298;
+    }
+    AIR
+    {
+        type            calculated;
+        value           uniform 298;
+    }
+    WALL_SWIRL_IN
+    {
+        type            calculated;
+    }
+    WALL_SWIRL_OUT
+    {
+        type            calculated;
+    }
+    WALL_TANGENTIAL
+    {
+        type            calculated;
+    }
+    WALL_AIR_IN
+    {
+        type            calculated;
+    }
+    WALL_AIR_OUT
+    {
+        type            calculated;
+    }
+    WALL_TUBE_LOW_IN
+    {
+        type            calculated;
+    }
+    WALL_TUBE_LOW_OUT
+    {
+        type            calculated;
+    }
+    WALL_TUBE_UP_IN
+    {
+        type            calculated;
+    }
+    WALL_TUBE_UP
+    {
+        type            calculated;
+    }
+    WALL_TUBE_EDGE
+    {
+        type            calculated;
+    }
+    WALL_QUARL_IN
+    {
+        type            calculated;
+    }
+    WALL_QUARL_OUT
+    {
+        type            calculated;
+    }
+
+    OUT
+    {
+        type            calculated;
+        value           uniform 298;
+    }
+    ATOM
+    {
+        type            calculated;
+        value           uniform 298;
+    }
+    FUEL
+    {
+        type            calculated;
+        value           uniform 298;
+    }
+}
+
+// ************************************************************************* //
