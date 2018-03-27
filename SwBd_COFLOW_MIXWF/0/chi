@@ -1,0 +1,111 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      chi;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 -1 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    AIR1
+    {
+        type            calculated;
+    }
+    AIR2
+    {
+        type            calculated;
+    }
+    AIR3
+    {
+        type            calculated;
+    }
+    AIR4
+    {
+        type            calculated;
+    }
+    AIR
+    {
+        type            calculated;
+    }
+    WALL_SWIRL_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_SWIRL_OUT
+    {
+        type            zeroGradient;
+    }
+    WALL_TANGENTIAL
+    {
+        type            zeroGradient;
+    }
+    WALL_AIR_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_AIR_OUT
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_LOW_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_LOW_OUT
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_UP_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_UP
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_EDGE
+    {
+        type            zeroGradient;
+    }
+    WALL_QUARL_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_QUARL_OUT
+    {
+        type            zeroGradient;
+    }
+    OUT
+    {
+        type            inletOutlet;
+        inletValue      uniform 0;
+        value           uniform 0;
+    }
+    ATOM
+    {
+        type            inletOutlet;
+        inletValue      uniform 0;
+        value           uniform 0;
+    }
+    FUEL
+    {
+        type            calculated;
+    }
+}
+
+
+// ************************************************************************* //

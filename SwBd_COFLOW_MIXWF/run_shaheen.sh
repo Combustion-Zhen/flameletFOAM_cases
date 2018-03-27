@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --account=k1242
-#SBATCH --job-name=SwBd39MBulk
+#SBATCH --job-name=SwBd39MM
 #SBATCH --nodes=6
 #SBATCH --ntasks-per-node=32
 #SBATCH --ntasks-per-socket=16
@@ -14,8 +14,20 @@
 
 OMP_NUM_THREADS=1
 
-#canteraToFoam
-#
+module load python/3.6.4
+AIRINLET="AIR1 AIR2 AIR3 AIR4"
+
+cd constant/boundaryData
+for folder in $AIRINLET
+do
+    cd $folder
+    cp /project/k1242/Zhen/OpenFOAM/OpenFOAM_py/SwB/inlet/inlet_time_ext.py .
+    cd ..
+done
+cd ../..
+
+canteraToFoam
+
 sed "s/@NUMSUBDOM@/192/g" \
     system/decomposeParDict_template > system/decomposeParDict
 decomposePar -latestTime
@@ -51,6 +63,15 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.1/g" \
     system/controlDict_template > system/controlDict
 srun --hint=nomultithread flameletFoam -parallel
 
+cd constant/boundaryData
+for folder in $AIRINLET
+do
+    cd $folder
+    python3 inlet_time_ext.py
+    cd ..
+done
+cd ../..
+
 sed -e "s/@TIMESCHEME@/Euler/g" \
     -e "s/@GRAD@/Gauss linear/g" -e "s/@DIVPHIU@/LUST grad(U)/g" \
     system/fvSchemes_template > system/fvSchemes
@@ -64,6 +85,15 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.2/g" \
     system/controlDict_template > system/controlDict
 srun --hint=nomultithread flameletFoam -parallel
 
+cd constant/boundaryData
+for folder in $AIRINLET
+do
+    cd $folder
+    python3 inlet_time_ext.py
+    cd ..
+done
+cd ../..
+
 cp system/controlDict system/log4_controlDict
 sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.3/g" \
     -e "s/@DELTAT@/5e-7/g" -e "s/@WRITEINTERVAL@/0.02/g" \
@@ -73,6 +103,15 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.3/g" \
     system/controlDict_template > system/controlDict
 srun --hint=nomultithread flameletFoam -parallel
 
+cd constant/boundaryData
+for folder in $AIRINLET
+do
+    cd $folder
+    python3 inlet_time_ext.py
+    cd ..
+done
+cd ../..
+
 cp system/controlDict system/log5_controlDict
 sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.4/g" \
     -e "s/@DELTAT@/5e-7/g" -e  "s/@WRITEINTERVAL@/0.02/g" \
@@ -81,6 +120,15 @@ sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.4/g" \
     -e "s/@RESTART@/true/g" -e "s/@RESTARTOUT@/false/g" \
     system/controlDict_template > system/controlDict
 srun --hint=nomultithread flameletFoam -parallel
+
+cd constant/boundaryData
+for folder in $AIRINLET
+do
+    cd $folder
+    python3 inlet_time_ext.py
+    cd ..
+done
+cd ../..
 
 cp system/controlDict system/log6_controlDict
 sed -e "s/@STARTTIME@/latestTime/g" -e "s/@ENDTIME@/0.5/g" \
