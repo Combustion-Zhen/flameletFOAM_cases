@@ -1,0 +1,110 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      p;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 -1 -2 0 0 0 0];
+
+internalField   uniform 101325;
+
+boundaryField
+{
+    AIR1
+    {
+        type            zeroGradient;
+    }
+    AIR2
+    {
+        type            zeroGradient;
+    }
+    AIR3
+    {
+        type            zeroGradient;
+    }
+    AIR4
+    {
+        type            zeroGradient;
+    }
+    AIR
+    {
+        type            zeroGradient;
+    }
+    WALL_SWIRL_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_SWIRL_OUT
+    {
+        type            zeroGradient;
+    }
+    WALL_TANGENTIAL
+    {
+        type            zeroGradient;
+    }
+    WALL_AIR_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_AIR_OUT
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_LOW_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_LOW_OUT
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_UP_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_UP
+    {
+        type            zeroGradient;
+    }
+    WALL_TUBE_EDGE
+    {
+        type            zeroGradient;
+    }
+    WALL_QUARL_IN
+    {
+        type            zeroGradient;
+    }
+    WALL_QUARL_OUT
+    {
+        type            zeroGradient;
+    }
+    OUT
+    {
+        type            totalPressure;
+        gamma           1.4;
+        p0              uniform 101325;
+    }
+    ATOM
+    {
+        type            totalPressure;
+        gamma           1.4;
+        p0              uniform 101325;
+    }
+    FUEL
+    {
+        type            zeroGradient;
+    }
+}
+
+// ************************************************************************* //
