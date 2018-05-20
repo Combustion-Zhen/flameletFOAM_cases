@@ -16,7 +16,7 @@ FoamFile
 
 #include    "sample.inc"
 
-surfaceFormat   raw;
+surfaceFormat   foamFile;
 
 // Fields to sample.
 fields

@@ -23,9 +23,9 @@ printCoeffs     on;
 
 SmagorinskyCoeffs
 {
-    Sct       0.4;
+    Sct       0.7;
 
-    Sc        1;
+    Sc        0.7;
 
     Cchi      2;
 

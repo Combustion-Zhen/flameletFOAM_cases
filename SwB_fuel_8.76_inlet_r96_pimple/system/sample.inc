@@ -1,5 +1,6 @@
     diam    0.0044;
     x02 #calc "$diam*2.0";
+    x03 #calc "$diam*3.0";
     x04 #calc "$diam*4.0";
     x05 #calc "$diam*5.0";
     x10 #calc "$diam*10.0";
@@ -16,19 +17,13 @@
 
     surfaces
     (
-        xD02
+        xD03
         {
             $xDPlane;
-            basePoint   ( $x02 0 0 );
+            basePoint   ( $x03 0 0 );
         }
 
-        xD04
-        {
-            $xDPlane;
-            basePoint   ( $x04 0 0 );
-        }
-
-        xD05
+        xDout
         {
             type        patch;
             patches     ( outlet );

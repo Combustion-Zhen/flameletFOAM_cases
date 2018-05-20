@@ -3,7 +3,7 @@
 NPROC=14
 
 sed -e "s/@STARTFROM@/startTime/g" -e "s/@STARTTIME@/0.0/g" \
-    -e "s/@ENDTIME@/0.03/g" -e "s/@DELTAT@/1e-6/g" \
+    -e "s/@ENDTIME@/0.05/g" -e "s/@DELTAT@/1e-6/g" \
     -e "s/@WRITEINTERVAL@/10000/g" -e "s/@WRITEFORMAT@/binary/g" \
     -e "s/@AVE_ENABLED@/false/g" -e "s/@SAMPLE_ENABLED@/false/g" \
     system/controlDict_template > system/controlDict
@@ -28,15 +28,8 @@ decomposePar
 mpirun -n $NPROC pimpleFoam -parallel
 
 sed -e "s/@STARTFROM@/latestTime/g" -e "s/@STARTTIME@/0.0/g" \
-    -e "s/@ENDTIME@/0.04/g" -e "s/@DELTAT@/1e-6/g" \
-    -e "s/@WRITEINTERVAL@/5000/g" -e "s/@WRITEFORMAT@/binary/g" \
-    -e "s/@AVE_ENABLED@/true/g" -e "s/@SAMPLE_ENABLED@/false/g" \
-    system/controlDict_template > system/controlDict
-mpirun -n $NPROC pimpleFoam -parallel
-
-sed -e "s/@STARTFROM@/latestTime/g" -e "s/@STARTTIME@/0.0/g" \
-    -e "s/@ENDTIME@/0.06/g" -e "s/@DELTAT@/1e-6/g" \
-    -e "s/@WRITEINTERVAL@/5000/g" -e "s/@WRITEFORMAT@/binary/g" \
+    -e "s/@ENDTIME@/0.1/g" -e "s/@DELTAT@/1e-6/g" \
+    -e "s/@WRITEINTERVAL@/10000/g" -e "s/@WRITEFORMAT@/binary/g" \
     -e "s/@AVE_ENABLED@/true/g" -e "s/@SAMPLE_ENABLED@/true/g" \
     system/controlDict_template > system/controlDict
 mpirun -n $NPROC pimpleFoam -parallel
