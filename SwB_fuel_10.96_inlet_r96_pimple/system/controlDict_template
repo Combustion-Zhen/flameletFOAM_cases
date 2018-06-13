@@ -1,0 +1,94 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     pimpleFoam;
+
+startFrom       @STARTFROM@;
+
+startTime       @STARTTIME@;
+
+stopAt          endTime;
+
+endTime         @ENDTIME@;
+
+deltaT          @DELTAT@;
+
+writeControl    timeStep;
+
+writeInterval   @WRITEINTERVAL@;
+
+purgeWrite      0;
+
+writeFormat     @WRITEFORMAT@;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+functions
+{
+    fieldAverage1
+    {
+        type            fieldAverage;
+        functionObjectLibs ( "libfieldFunctionObjects.so" );
+        enabled         @AVE_ENABLED@;
+        outputControl   outputTime;
+        resetOnRestart  true;
+        resetOnOutput   false;
+        fields
+        (
+            U
+            {
+                mean on;
+                prime2Mean on;
+                base time;
+            }
+        );
+    }
+
+    surfaceSampling
+    {
+        type surfaces;
+
+        // Where to load it from (if not already in solver)
+        functionObjectLibs ("libsampling.so");
+        enabled         @SAMPLE_ENABLED@;
+        outputControl   outputTime;
+
+        surfaceFormat foamFile;
+
+        // Fields to be sampled
+        fields
+        (
+            U
+        );
+
+#include "sample.inc"
+
+    }
+
+}
+
+
+// ************************************************************************* //
+

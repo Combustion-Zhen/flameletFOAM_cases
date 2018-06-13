@@ -1,0 +1,44 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.3.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      extrudeMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+constructFrom patch;
+
+sourceCase ".";
+sourcePatches (front);
+
+exposedPatchName back;
+
+flipNormals false;
+
+extrudeModel        sector;
+
+nLayers             60;
+
+expansionRatio      1.0;
+
+sectorCoeffs
+{
+    axisPt      (0 0 0);
+    axis        (1 0 0);
+    angle       360;  // For nLayers=1 assume symmetry so angle/2 on each side
+}
+
+mergeFaces false;
+
+mergeTol 2e-5;
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //

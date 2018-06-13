@@ -1,0 +1,33 @@
+    diam    0.0044;
+    x02 #calc "$diam*2.0";
+    x03 #calc "$diam*3.0";
+    x04 #calc "$diam*4.0";
+    x05 #calc "$diam*5.0";
+    x10 #calc "$diam*10.0";
+    x15 #calc "$diam*15.0";
+
+    interpolationScheme cell;
+
+    xDPlane
+    {
+        type            plane;
+        interpolate     true;
+        normalVector    ( 1 0 0 );
+    }
+
+    surfaces
+    (
+        xD03
+        {
+            $xDPlane;
+            basePoint   ( $x03 0 0 );
+        }
+
+        xDout
+        {
+            type        patch;
+            patches     ( outlet );
+            interpolate true;
+            triangulate false;
+        }
+    );
